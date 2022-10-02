@@ -1,3 +1,5 @@
+import { startConfetti, stopConfetti, removeConfetti } from './confetti.js';
+
 const playerScoreEl = document.getElementById('playerScore');
 const playerChoiceEl = document.getElementById('playerChoice');
 const computerScoreEl = document.getElementById('computerScore');
@@ -17,7 +19,6 @@ const computerSpock = document.getElementById('computerSpock');
 
 const allGameIcons = document.querySelectorAll('.far');
 const result = document.getElementById('resultText');
-const reset = document.querySelector('.reset-icon');
 
 const choices = {
 	rock: { name: 'Rock', defeats: ['scissors', 'lizard'] },
@@ -36,6 +37,8 @@ function resetSelected() {
 	allGameIcons.forEach((icon) => {
 		icon.classList.remove('selected');
 	});
+	stopConfetti();
+	removeConfetti();
 }
 
 // ResetScore and playerChoice / computerChoice
@@ -47,6 +50,7 @@ function resetAll() {
 	computerScoreNumber = 0;
 	result.textContent = 'Click the Icon to Start!';
 }
+window.resetAll = resetAll;
 
 // Random computer choice
 function computerRandomChoice() {
@@ -81,6 +85,7 @@ function updateScore(playerChoice) {
 	} else {
 		const choice = choices[playerChoice].defeats;
 		if (choice.indexOf(computerChoice) > -1) {
+			startConfetti();
 			result.textContent = 'You Won!';
 			playerScoreNumber++;
 			playerScoreEl.textContent = playerScoreNumber;
@@ -128,3 +133,4 @@ function select(playerChoice) {
 			break;
 	}
 }
+window.select = select;
