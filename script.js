@@ -17,6 +17,7 @@ const computerSpock = document.getElementById('computerSpock');
 
 const allGameIcons = document.querySelectorAll('.far');
 const result = document.getElementById('resultText');
+const reset = document.querySelector('.reset-icon');
 
 const choices = {
 	rock: { name: 'Rock', defeats: ['scissors', 'lizard'] },
@@ -35,6 +36,16 @@ function resetSelected() {
 	allGameIcons.forEach((icon) => {
 		icon.classList.remove('selected');
 	});
+}
+
+// ResetScore and playerChoice / computerChoice
+function resetAll() {
+	resetSelected();
+	playerScoreEl.textContent = '0';
+	playerScoreNumber = 0;
+	computerScoreEl.textContent = 0;
+	computerScoreNumber = 0;
+	result.textContent = 'Click the Icon to Start!';
 }
 
 // Random computer choice
